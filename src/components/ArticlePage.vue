@@ -137,7 +137,7 @@ const tagClicked = (tag) => {
 
 const getArticleContent = async () => {
   try {
-    const response = await axios.get(`/articles/${articleName.value}/html/index.html`)
+    const response = await axios.get(`/bridgingTheGap/articles/${articleName.value}/html/index.html`)
 
     if (response.status === 200) {
       articleContent.value = response.data

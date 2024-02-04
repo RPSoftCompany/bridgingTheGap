@@ -6,7 +6,7 @@
       <div class="md:min-w-[12rem] max-h-[14rem] overflow-hidden cursor-pointer">
         <img
           class="md:max-w-[12rem] md:max-h-[12rem] w-full rounded-l-md"
-          :src="`/articles/${name}/img/www/image.jpg`"
+          :src="`/bridgingTheGap/articles/${name}/img/www/image.jpg`"
         />
       </div>
     </router-link>
