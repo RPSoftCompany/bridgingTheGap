@@ -42,4 +42,4 @@ jobs:
       #     publish_dir: dist
 
       - name: Install
-        run: cp -R bridgingTheGap/dist ${{ secrets.BTG_PATH }}
+        run: cp -R bridgingTheGap/bridgingTheGap/dist ${{ secrets.BTG_PATH }}
