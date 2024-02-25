@@ -41,8 +41,5 @@ jobs:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     publish_dir: dist
 
-      - name: Check
-        run: pwd && ls -lha
-
       - name: Install
-        run: cp -R bridgingTheGap/bridgingTheGap/dist ${{ secrets.BTG_PATH }}
+        run: cp -R dist ${{ secrets.BTG_PATH }}
