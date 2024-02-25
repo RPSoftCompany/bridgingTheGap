@@ -22,6 +22,7 @@
           class="md:inline pr-2 hover:text-black hover:dark:text-gray-50 navigation-button"
           :class="{
             'text-gray-600': !currentTags.includes(tag),
+            'dark:text-gray-400': !currentTags.includes(tag),
             'text-black': currentTags.includes(tag),
             'dark:text-white': currentTags.includes(tag),
             'font-bold': currentTags.includes(tag)
