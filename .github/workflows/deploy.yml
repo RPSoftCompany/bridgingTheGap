@@ -40,5 +40,5 @@ jobs:
       #     github_token: ${{ secrets.GITHUB_TOKEN }}
       #     publish_dir: dist
 
-      - name: Check
-        run: pwd
+      - name: Install
+        run: cp -R bridgingTheGap/dist ${{ secrets.BTG_PATH }}
