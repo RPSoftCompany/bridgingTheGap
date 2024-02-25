@@ -15,7 +15,7 @@
               type="button"
               class="inline-flex items-center p-1 ms-2 text-sm text-neutral-400 bg-transparent rounded-sm hover:bg-neutral-200 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-300"
               data-dismiss-target="#badge-dismiss-default"
-              aria-label="Remove"
+              aria-label="Remove Tag"
               @click="removeTag(tag)"
             >
               <svg
@@ -62,7 +62,7 @@
 
 <script setup>
 import ArticleCard from '@/components/ArticleCard.vue'
-import { computed, onBeforeMount, ref, watch } from 'vue'
+import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const tags = ref([])
@@ -86,6 +86,10 @@ watch(route, (current) => {
   }
 })
 
+/**
+ * removeTag
+ * @param tag
+ */
 const removeTag = (tag) => {
   const tempArray = [...tags.value].filter((el) => {
     return el !== tag

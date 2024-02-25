@@ -9,6 +9,10 @@
   font-size: 18px;
 }
 
+body {
+  font-family: "Atkinson Hyperlegible", sans-serif;
+}
+
 @supports (font-size-adjust: 1) {
   :root {
     font-size-adjust: 0.5;
@@ -115,7 +119,6 @@ h6 {
 // ==========================================
 // Transitions
 // ==========================================
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
@@ -124,6 +127,18 @@ h6 {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+@media (prefers-reduced-motion) {
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: none;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    transition: none;
+  }
 }
 
 .scale-enter-active,
@@ -145,6 +160,24 @@ h6 {
   height: 1.75rem;
 }
 
+@media (prefers-reduced-motion) {
+  .scale-enter-active,
+  .scale-leave-active {
+    transition: none;
+    overflow: hidden;
+  }
+
+  .scale-enter-from,
+  .scale-leave-to {
+    transition: none;
+  }
+
+  .scale-enter-to,
+  .scale-leave-from {
+    transition: none;
+  }
+}
+
 .scale-card-enter-active,
 .scale-card-leave-active {
   transition: all 0.5s ease;
@@ -161,5 +194,22 @@ h6 {
 
 .scale-card-enter-to,
 .scale-card-leave-from {
-  height: 13rem;
+  height: 100%;
+}
+
+@media (prefers-reduced-motion) {
+  .scale-card-enter-active,
+  .scale-card-leave-active {
+    transition: none;
+  }
+
+  .scale-card-enter-from,
+  .scale-card-leave-to {
+    transition: none;
+  }
+
+  .scale-card-enter-to,
+  .scale-card-leave-from {
+    transition: none;
+  }
 }

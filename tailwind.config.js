@@ -12,11 +12,6 @@ export default {
       screens: {
         xs: '400px'
       },
-      fontFamily: {
-        sans: ['"Inter", sans-serif'],
-        serif: ['InterVariable, sans-serif'],
-        mono: ['ui-monospace', 'SFMono-Regular']
-      },
       boxShadow: {
         up: '0 2px 6px -1px'
       },

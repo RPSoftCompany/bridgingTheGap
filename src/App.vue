@@ -1,7 +1,7 @@
 <template>
   <div id="body" :class="{ dark: darkTheme }">
     <nav
-      class="antialiased bg-neutral-200 dark:bg-neutral-800 shadow-md dark:shadow-none border-gray-200 sticky top-0"
+      class="z-10 antialiased bg-neutral-200 dark:bg-neutral-800 shadow-md dark:shadow-none border-gray-200 sticky top-0"
     >
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <RouterLink to="/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -13,7 +13,7 @@
           />
           <img v-else src="@/assets/logo.svg" class="h-8" alt="Bridging the Gap logo" />
           <span
-            class="self-center text-2xl font-semibold whitespace-nowrap hidden xs:block text-black dark:text-gray-50"
+            class="self-center text-2xl font-semibold whitespace-nowrap hidden xs:block text-black dark:text-gray-50 tracking-wide"
             >Bridging the Gap</span
           >
         </RouterLink>
@@ -48,19 +48,20 @@
             <li>
               <RouterLink
                 to="/about"
-                class="text-black dark:text-white cursor-pointer navigation-button"
+                class="text-black dark:text-white navigation-button"
                 aria-current="page"
                 >About us
               </RouterLink>
             </li>
             <li>
-              <SvgIcon
-                class="text-black dark:text-white cursor-pointer"
-                type="mdi"
-                :path="mdiThemeLightDark"
-                :size="32"
-                @click="changeTheme"
-              />
+              <button aria-label="Change theme" type="button" @click="changeTheme">
+                <SvgIcon
+                  class="text-black dark:text-white"
+                  type="mdi"
+                  :path="mdiThemeLightDark"
+                  :size="32"
+                />
+              </button>
             </li>
           </ul>
         </div>
@@ -92,6 +93,7 @@
           property="cc:attributionName"
           rel="cc:attributionURL dct:creator"
           target="_blank"
+          class="link text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white"
           ><b>Karol Skrzymowski</b></a
         >
         <div>&nbsp;and&nbsp;</div>
@@ -100,29 +102,21 @@
           property="cc:attributionName"
           rel="cc:attributionURL dct:creator"
           target="_blank"
+          class="link text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white"
           ><b>Radosław Przewuski</b></a
         >
         &nbsp;is licensed under
-        <a
-          href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1"
-          rel="license noopener noreferrer"
-          style="display: inline-block"
-          target="_blank"
-        >
-        </a>
-        &nbsp;CC BY 4.0
-        <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank">
+        <a href="https://creativecommons.org/licenses/by/4.0" target="_blank" class="flex">
+          &nbsp;CC BY 4.0
           <img
             alt=""
             class="cc_image mx-1 self-center"
-            src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"
+            src="https://mirrors.creativecommons.org/presskit/icons/cc.svg"
           />
-        </a>
-        <a href="https://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank">
           <img
             alt=""
             class="cc_image"
-            src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"
+            src="https://mirrors.creativecommons.org/presskit/icons/by.svg"
           />
         </a>
       </div>
@@ -131,13 +125,14 @@
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRoute } from 'vue-router'
 import { initFlowbite } from 'flowbite'
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import SvgIcon from '@jamescoyle/vue-icon'
 import { mdiThemeLightDark } from '@mdi/js'
 
 const darkTheme = ref(false)
+const route = useRoute()
 
 // initialize components based on data attribute selectors
 onMounted(() => {

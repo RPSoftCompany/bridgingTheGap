@@ -2,74 +2,96 @@
   <div class="flex justify-between w-full">
     <div class="flex justify-center flex-grow">
       <div class="article">
+        <div class="mb-5">
+          <router-link to="/"
+                       class="flex link items-end text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white">
+            <SvgIcon
+                type="mdi"
+                :path="mdiArrowLeft"
+                :size="24"
+            />
+            <h5 class="my-0 ml-2">Back to articles list</h5>
+          </router-link>
+        </div>
         <h1 class="mt-3 mb-2.5">{{ title }}</h1>
         <div class="my-2 border-b dark:border-neutral-800 lg:hidden"/>
         <div class="text-justify hyphens-auto my-2 block lg:hidden">
-          <span
-              class="pr-2 font-bold cursor-pointer navigation-button text-gray-400 hover:text-black hover:dark:text-gray-50"
+          <router-link
+              class="pr-2 font-bold navigation-button text-gray-400 hover:text-black hover:dark:text-gray-50"
               v-for="tag of tags"
               :key="tag"
-              @click="tagClicked(tag)"
+              :to="tagLink(tag)"
           >
             #{{ tag }}
-          </span>
+          </router-link>
         </div>
         <p class="text-justify hyphens-auto mb-2 block lg:hidden">
-          <div class="text-gray-400">Published</div>
+          <div class="text-gray-600 dark:text-gray-400">Published</div>
           <b>{{ published }}</b>
-          <div class="text-gray-400">Last update</div>
+          <div class="text-gray-600 dark:text-gray-400">Last update</div>
           <b>{{ lastUpdate }}</b>
         </p>
+        <p class="lg:hidden">
+          <div class="mt-3 border-b dark:border-neutral-800"/>
+          <h5>Authors</h5>
+          <div v-for="author of authors" :key="author.author">
+            <a target="_blank" class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50"
+               :href="author.link">{{ author.author }}</a>
+          </div>
+        </p>
         <div class="my-2 border-b dark:border-neutral-800 lg:hidden"/>
-        <!--      <p class="text-justify hyphens-auto">Placeholder for any disclaimers like license usage, naming conventions,-->
-        <!--        anything...</p>-->
         <div v-html="articleContent"/>
         <p class="lg:hidden" v-if="reviewers.length > 0">
           <div class="mt-3 border-b dark:border-neutral-800"/>
           <h5>Article Reviewers</h5>
           <div v-for="reviewer of reviewers" :key="reviewer.reviewer">
-            <a target="_blank" class="link text-black"
+            <a target="_blank" class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50"
                :href="reviewer.link">{{ reviewer.reviewer }}</a>
           </div>
         </p>
         <div v-if="bibliography.length > 0">
           <div class="mt-3 border-b dark:border-neutral-800"/>
-          <h5>Bibliography</h5>
-          <a class="link" target="_blank" v-for="bib of bibliography" :key="bib.title" :href="bib.link">{{
+          <h3>Bibliography</h3>
+          <a class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50" target="_blank"
+             v-for="bib of bibliography" :key="bib.title" :href="bib.link">{{
               bib.title
             }}</a>
         </div>
-
-        <!--        <p class="text-justify hyphens-auto">-->
-        <!--          Placeholder for credits given to peer reviewers, contributors, etc.-->
-        <!--        </p>-->
       </div>
     </div>
     <div class="w-[10rem] self-stretch border-l dark:border-neutral-900 ml-3 text-right hidden lg:block">
       <div class="mx-3 sticky top-24">
-        <h5 class="mt-0 mb-2">Tags</h5>
+        <h4 class="mt-0 mb-2">Tags</h4>
         <div>
-          <div
-              class="inline-block pl-2 pt-1 text-gray-400 hover:text-black hover:dark:text-gray-50 cursor-pointer"
+          <router-link
+              class="inline-block pl-2 pt-1 text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50"
               v-for="tag of tags"
               :key="tag"
-              @click="tagClicked(tag)"
+              :to="tagLink(tag)"
           >#{{ tag }}
-          </div>
+          </router-link>
         </div>
         <div class="mt-3 border-b dark:border-neutral-800" v-if="reviewers.length > 0"/>
         <p class="text-right hyphens-auto mb-2 mt-3" v-if="reviewers.length > 0">
-          <h5 class="">Article Reviewers</h5>
+          <h4 class="">Authors</h4>
+          <div v-for="author of authors" :key="author.author">
+            <a target="_blank" class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50"
+               :href="author.link">{{ author.author }}</a>
+          </div>
+        </p>
+        <div class="mt-3 border-b dark:border-neutral-800"/>
+        <p class="text-right hyphens-auto mb-2 mt-3" v-if="reviewers.length > 0">
+          <h4 class="">Article Reviewers</h4>
           <div v-for="reviewer of reviewers" :key="reviewer.reviewer">
-            <a target="_blank" class="link text-black"
+            <a target="_blank" class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50"
                :href="reviewer.link">{{ reviewer.reviewer }}</a>
           </div>
         </p>
         <div class="mt-3 border-b dark:border-neutral-800"/>
         <p class="text-right hyphens-auto mb-2 mt-3">
-          <div class="text-gray-400">Published</div>
+          <div class="text-gray-600 dark:text-gray-400">Published</div>
           <div><b>{{ published }}</b></div>
-          <div class="text-gray-400">Last update</div>
+          <div class="text-gray-600 dark:text-gray-400">Last update</div>
           <div><b>{{ lastUpdate }}</b></div>
         </p>
       </div>
@@ -82,6 +104,8 @@ import {onBeforeMount, ref, watch} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import articles from "../../articles.json" with {type: "json"}
 import axios from "axios";
+import {mdiArrowLeft} from "@mdi/js";
+import SvgIcon from "@jamescoyle/vue-icon";
 
 const route = useRoute()
 const router = useRouter()
@@ -93,6 +117,7 @@ const published = ref("")
 const lastUpdate = ref("")
 const bibliography = ref([])
 const reviewers = ref([])
+const authors = ref([])
 
 const tags = ref([])
 
@@ -115,23 +140,33 @@ const updateData = async () => {
 
   if (articleMeta) {
     title.value = articleMeta.title
-    published.value = articleMeta.publishDate;
-    lastUpdate.value = articleMeta.lastUpdate;
+    published.value = new Date(articleMeta.publishDate).toLocaleDateString();
+    lastUpdate.value = new Date(articleMeta.lastUpdate).toLocaleDateString();
     tags.value = articleMeta.tags ? articleMeta.tags : [];
     bibliography.value = articleMeta.bibliography ? articleMeta.bibliography : [];
     reviewers.value = articleMeta.reviewers ? articleMeta.reviewers : []
+    authors.value = articleMeta.authors ? articleMeta.authors : []
   }
 
   await getArticleContent()
 }
 
-const tagClicked = (tag) => {
-  if (route.query.tags) {
-    if (!route.query.tags.split(",").includes(tag)) {
-      router.push(`/?tags=${route.query.tags + ',' + tag}`)
+const tagLink = (tag) => {
+  if (route.query && route.query.tags) {
+    if (!route.query.tags.split(',').includes(tag)) {
+      return `/?tags=${route.query.tags + ',' + tag}`
+    } else {
+      const filter = route.query.tags.split(',').filter((el) => {
+        return el !== tag
+      })
+      if (filter.length === 0) {
+        return `/`
+      } else {
+        return `/?tags=${filter}`
+      }
     }
   } else {
-    router.push(`/?tags=${tag}`)
+    return `/?tags=${tag}`
   }
 }
 
