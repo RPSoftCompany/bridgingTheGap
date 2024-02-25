@@ -51,7 +51,9 @@
     <div class="flex flex-grow items-center gap-3">
       <h3>Our Reviewers</h3>
     </div>
-    <div class="flex flex-grow flex-col gap-3 lg:w-[100%] md:w-[75%]">
+    <div
+      class="flex flex-grow flex-col gap-3 xl:w-[77%] lg:w-[55rem] w-[80%] max-w-[70ch] lg:max-w-[100%]"
+    >
       <div v-for="reviewer of reviewers" :key="reviewer.id" class="flex flex-col items-stretch">
         <div class="min-w-[60vw] lg:min-w-[0] my-2 border-b dark:border-neutral-800" />
         <div
@@ -65,12 +67,35 @@
           >
           <div class="flex flex-col lg:items-end items-center justify-self-end gap-1">
             <div class="mb-1 lg:mt-0 mt-3">Articles reviewed by {{ reviewer.name }}</div>
-            <router-link
-              class="link text-gray-600 hover:text-black dark:hover:text-white"
-              :to="`/articles/${article.link}`"
-              v-for="article of reviewer.reviewed"
-              >{{ article.title }}
-            </router-link>
+            <template v-for="article of reviewer.reviewed.slice(0, reviewMax)">
+              <router-link
+                class="link text-gray-600 hover:text-black dark:hover:text-white"
+                :to="`/articles/${article.link}`"
+                >{{ article.title }}
+              </router-link>
+            </template>
+            <template v-if="reviewer.reviewed.length > reviewMax">
+              <template v-if="showMore === reviewer.name">
+                <router-link
+                  v-for="article of reviewer.reviewed.slice(reviewMax)"
+                  class="link text-gray-600 hover:text-black dark:hover:text-white"
+                  :to="`/articles/${article.link}`"
+                  >{{ article.title }}
+                </router-link>
+                <router-link
+                  class="link text-gray-600 hover:text-black dark:hover:text-white font-bold"
+                  to="about"
+                  >show less
+                </router-link>
+              </template>
+              <template v-else>
+                <router-link
+                  class="link text-gray-600 hover:text-black dark:hover:text-white font-bold"
+                  :to="{ name: 'about', query: { reviewed: reviewer.name } }"
+                  >show more
+                </router-link>
+              </template>
+            </template>
           </div>
         </div>
       </div>
@@ -122,12 +147,20 @@
 
 <script setup>
 import articles from '../../articles.json' with { type: 'json' }
-import { onBeforeMount, ref } from 'vue'
+import { onBeforeMount, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const reviewers = ref([])
+const showMore = ref('')
+
+const reviewMax = 2
 
 onBeforeMount(() => {
   reviewers.value = []
+
+  showMore.value = route.query.reviewed
 
   const reviewersMap = new Map()
   const reviewerDetails = new Map()
@@ -165,6 +198,10 @@ onBeforeMount(() => {
       reviewed: reviewersMap.get(reviewer)
     })
   }
+})
+
+watch(route, (current) => {
+  showMore.value = current.query.reviewed
 })
 </script>
 
