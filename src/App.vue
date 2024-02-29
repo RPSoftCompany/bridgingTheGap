@@ -140,6 +140,8 @@ onMounted(() => {
 
   if (localStorage.theme) {
     darkTheme.value = localStorage.theme === 'true'
+  } else {
+    darkTheme.value = window.matchMedia('(prefers-color-scheme: dark)').matches
   }
 })
 
