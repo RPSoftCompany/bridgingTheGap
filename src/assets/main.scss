@@ -13,6 +13,8 @@ html {
   --color-scheme: light;
 
   --mainTransition: all 0.5s ease;
+  --cardTransition: all 200ms;
+  --navigationButtonTransition: text-decoration-color 300ms;
 
   color-scheme: var(--color-scheme);
 }
@@ -20,6 +22,8 @@ html {
 @media (prefers-reduced-motion) {
   html {
     --mainTransition: none;
+    --cardTransition: none;
+    --navigationButtonTransition: none;
   }
 }
 
@@ -75,7 +79,7 @@ footer {
 }
 
 .card {
-  transition: all 200ms;
+  transition: var(--cardTransition);
 }
 
 .navigation-button {
@@ -86,7 +90,7 @@ footer {
   text-decoration-line: underline;
   text-underline-offset: 0.15rem;
 
-  transition: text-decoration-color 300ms;
+  transition: var(--navigationButtonTransition);
 
   &:hover {
     text-decoration-color: initial;

@@ -3,19 +3,22 @@
     <nav
       class="z-10 antialiased bg-neutral-200 dark:bg-neutral-800 shadow-md dark:shadow-none border-gray-200 sticky top-0"
     >
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <RouterLink to="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-          <img
-            v-if="darkTheme"
-            src="@/assets/logo_dark.svg"
-            class="h-8"
-            alt="Bridging the Gap logo"
-          />
-          <img v-else src="@/assets/logo.svg" class="h-8" alt="Bridging the Gap logo" />
-          <span
-            class="self-center text-2xl font-semibold whitespace-nowrap hidden xs:block text-black dark:text-gray-50 tracking-wide"
-            >Bridging the Gap</span
-          >
+      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-1">
+        <RouterLink to="/">
+          <div class="flex content-center space-x-3 rtl:space-x-reverse">
+            <img
+              v-if="darkTheme"
+              class="h-8"
+              src="@/assets/logo_dark.svg"
+              alt="Bridging the Gap logo"
+            />
+            <img v-else src="@/assets/logo.svg" class="h-8" alt="Bridging the Gap logo" />
+            <div
+              class="self-center text-xl mt-1 font-semibold whitespace-nowrap hidden xs:block text-black dark:text-gray-50 tracking-wide"
+            >
+              Bridging the Gap
+            </div>
+          </div>
         </RouterLink>
         <button
           data-collapse-toggle="navbar-default"
@@ -48,7 +51,7 @@
             <li>
               <RouterLink
                 to="/about"
-                class="text-black dark:text-white navigation-button"
+                class="text-base text-black dark:text-white navigation-button"
                 aria-current="page"
                 >About us
               </RouterLink>
@@ -56,7 +59,7 @@
             <li>
               <button aria-label="Change theme" type="button" @click="changeTheme">
                 <SvgIcon
-                  class="text-black dark:text-white"
+                  class="text-gray-500 hover:text-black dark:hover:text-white card"
                   type="mdi"
                   :path="mdiThemeLightDark"
                   :size="32"

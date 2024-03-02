@@ -60,7 +60,7 @@
           class="flex flex-col lg:items-start items-center lg:grid gap-3 lg:grid-flow-col grid-flow-row"
         >
           <a
-            class="link text-gray-600 text-lg hover:text-black dark:hover:text-white"
+            class="link text-gray-800 dark:text-gray-200 text-lg hover:text-black dark:hover:text-white"
             target="_blank"
             :href="reviewer.link"
             >{{ reviewer.name }}</a
@@ -69,7 +69,7 @@
             <div class="mb-1 lg:mt-0 mt-3">Articles reviewed by {{ reviewer.name }}</div>
             <template v-for="article of reviewer.reviewed.slice(0, reviewMax)">
               <router-link
-                class="link text-gray-600 hover:text-black dark:hover:text-white"
+                class="link text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
                 :to="`/articles/${article.link}`"
                 >{{ article.title }}
               </router-link>
@@ -78,19 +78,19 @@
               <template v-if="showMore === reviewer.name">
                 <router-link
                   v-for="article of reviewer.reviewed.slice(reviewMax)"
-                  class="link text-gray-600 hover:text-black dark:hover:text-white"
+                  class="link text-gray-600 dark:text-gray-400 hover:text-black dark:hover:text-white"
                   :to="`/articles/${article.link}`"
                   >{{ article.title }}
                 </router-link>
                 <router-link
-                  class="link text-gray-600 hover:text-black dark:hover:text-white font-bold"
+                  class="link text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white font-bold"
                   to="about"
                   >show less
                 </router-link>
               </template>
               <template v-else>
                 <router-link
-                  class="link text-gray-600 hover:text-black dark:hover:text-white font-bold"
+                  class="link text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white font-bold"
                   :to="{ name: 'about', query: { reviewed: reviewer.name } }"
                   >show more
                 </router-link>
@@ -105,7 +105,12 @@
       <div class="flex flex-grow flex-col items-center gap-3">
         <h3>Source</h3>
         <div>Content of this webpage, including it's code, can be found on our</div>
-        <a href="https://github.com/skrzymek/BridgingTheGap" target="_blank"><b>GitHub</b></a>
+        <a
+          href="https://github.com/skrzymek/BridgingTheGap"
+          class="link text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white"
+          target="_blank"
+          ><b>GitHub</b></a
+        >
       </div>
     </div>
     <div class="md:hidden flex flex-grow items-center">
@@ -198,6 +203,10 @@ onBeforeMount(() => {
       reviewed: reviewersMap.get(reviewer)
     })
   }
+
+  reviewers.value = reviewers.value.sort((a, b) => {
+    return a.name.localeCompare(b.name)
+  })
 })
 
 watch(route, (current) => {
