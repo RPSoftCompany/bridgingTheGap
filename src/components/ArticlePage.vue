@@ -44,7 +44,7 @@
         <p class="lg:hidden" v-if="reviewers.length > 0">
           <div class="mt-3 border-b dark:border-neutral-800"/>
           <h5>Article Reviewers</h5>
-          <div v-for="reviewer of reviewers" :key="reviewer.reviewer">
+          <div v-for="reviewer of sortedReviewers" :key="reviewer.reviewer">
             <a target="_blank" class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50"
                :href="reviewer.link">{{ reviewer.reviewer }}</a>
           </div>
@@ -52,10 +52,13 @@
         <div v-if="bibliography.length > 0">
           <div class="mt-3 border-b dark:border-neutral-800"/>
           <h3>Bibliography</h3>
-          <a class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50" target="_blank"
-             v-for="bib of bibliography" :key="bib.title" :href="bib.link">{{
-              bib.title
-            }}</a>
+          <template v-for="bib of bibliography" :key="bib.title">
+            <a class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50" target="_blank"
+               :href="bib.link">{{
+                bib.title
+              }}</a>
+            <span>&nbsp;{{ bib.author }}</span>
+          </template>
         </div>
       </div>
     </div>
@@ -72,8 +75,8 @@
           </router-link>
         </div>
         <div class="mt-3 border-b dark:border-neutral-800" v-if="reviewers.length > 0"/>
-        <p class="text-right hyphens-auto mb-2 mt-3" v-if="reviewers.length > 0">
-          <h4 class="">Authors</h4>
+        <p class="text-right hyphens-auto mb-2 mt-3">
+          <h4 class="mt-0 mb-2">Authors</h4>
           <div v-for="author of authors" :key="author.author">
             <a target="_blank" class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50"
                :href="author.link">{{ author.author }}</a>
@@ -81,8 +84,8 @@
         </p>
         <div class="mt-3 border-b dark:border-neutral-800"/>
         <p class="text-right hyphens-auto mb-2 mt-3" v-if="reviewers.length > 0">
-          <h4 class="">Article Reviewers</h4>
-          <div v-for="reviewer of reviewers" :key="reviewer.reviewer">
+          <h4 class="mt-0 mb-2">Article Reviewers</h4>
+          <div v-for="reviewer of sortedReviewers" :key="reviewer.reviewer">
             <a target="_blank" class="link text-gray-600 dark:text-gray-400 hover:text-black hover:dark:text-gray-50"
                :href="reviewer.link">{{ reviewer.reviewer }}</a>
           </div>
@@ -100,7 +103,7 @@
 </template>
 
 <script setup>
-import {onBeforeMount, ref, watch} from "vue";
+import {computed, onBeforeMount, ref, watch} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import articles from "../../articles.json" with {type: "json"}
 import axios from "axios";
@@ -127,6 +130,16 @@ onBeforeMount(async () => {
 
 watch(route, async () => {
   await updateData()
+})
+
+const sortedReviewers = computed(() => {
+  if (reviewers.value) {
+    return reviewers.value.sort((a, b) => {
+      return a.reviewer.localeCompare(b.reviewer)
+    })
+  }
+
+  return []
 })
 
 const updateData = async () => {

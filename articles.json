@@ -27,11 +27,11 @@
     ],
     "bibliography": [
       {
-        "title": "U.S. Media Consumption to Rise to 15.5 Hours a Day – Per Person – by 2015 by James Short, San Diego Supercomputer Center at the University of California San Diego",
+        "title": "U.S. Media Consumption to Rise to 15.5 Hours a Day – Per Person – by 2015",
         "link": "https://www.sdsc.edu/News%20Items/PR110613_hmi.html",
         "ISBN": "",
         "type": "article",
-        "author": "James Short"
+        "author": "by James Short, San Diego Supercomputer Center at the University of California San Diego"
       }
     ],
     "reviewers": [
@@ -81,8 +81,11 @@
     ],
     "bibliography": [
       {
-        "title": "U.S. Media Consumption to Rise to 15.5 Hours a Day – Per Person – by 2015 by James Short, San Diego Supercomputer Center at the University of California San Diego",
-        "link": "https://today.ucsd.edu/story/u.s._media_consumption_to_rise_to_15.5_hours_a_day_per_person_by_2015"
+        "title": "U.S. Media Consumption to Rise to 15.5 Hours a Day – Per Person – by 2015",
+        "link": "https://www.sdsc.edu/News%20Items/PR110613_hmi.html",
+        "ISBN": "",
+        "type": "article",
+        "author": "by James Short, San Diego Supercomputer Center at the University of California San Diego"
       }
     ]
   },
@@ -115,8 +118,11 @@
     ],
     "bibliography": [
       {
-        "title": "U.S. Media Consumption to Rise to 15.5 Hours a Day – Per Person – by 2015 by James Short, San Diego Supercomputer Center at the University of California San Diego",
-        "link": "https://today.ucsd.edu/story/u.s._media_consumption_to_rise_to_15.5_hours_a_day_per_person_by_2015"
+        "title": "U.S. Media Consumption to Rise to 15.5 Hours a Day – Per Person – by 2015",
+        "link": "https://www.sdsc.edu/News%20Items/PR110613_hmi.html",
+        "ISBN": "",
+        "type": "article",
+        "author": "by James Short, San Diego Supercomputer Center at the University of California San Diego"
       }
     ]
   }
