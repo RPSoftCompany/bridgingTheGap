@@ -12,12 +12,12 @@
         />
       </div>
     </router-link>
-    <div class="m-2 flex flex-col justify-between">
+    <div class="my-2 mx-3 flex flex-col justify-between">
       <router-link :to="`/articles/${name}`">
         <div class="text-2xl my-0 font-semibold">{{ title }}</div>
       </router-link>
       <div class="cutAfterFourRows my-0 font-thin">{{ short }}</div>
-      <div class="md:mt-0">
+      <div class="flex flex-wrap gap-1">
         <router-link
           class="md:inline pr-2 hover:text-black hover:dark:text-gray-50 navigation-button"
           :class="{

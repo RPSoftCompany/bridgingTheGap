@@ -60,7 +60,7 @@
           class="flex flex-col lg:items-start items-center lg:grid gap-3 lg:grid-flow-col grid-flow-row"
         >
           <a
-            class="link text-gray-800 dark:text-gray-200 text-lg hover:text-black dark:hover:text-white"
+            class="link font-bold text-gray-800 dark:text-gray-200 text-lg hover:text-black dark:hover:text-white"
             target="_blank"
             :href="reviewer.link"
             >{{ reviewer.name }}</a

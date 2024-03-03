@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="660pt" height="350pt" version="1.1" viewBox="0 0 660 350" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="GradientCloud" x1="0" x2="0" y1="0" y2="1">
+            <stop stop-color="#6b7280" offset="0%"/>
+            <stop stop-color="#4b5563" offset="100%"/>
+        </linearGradient>
+        <linearGradient id="GradientCloudDark" x1="0" x2="0" y1="0" y2="1">
+            <stop stop-color="#e5e7eb" offset="0%"/>
+            <stop stop-color="#d1d5db" offset="100%"/>
+        </linearGradient>
+        <style type="text/css">
+            .cloud {
+            fill:url(#GradientCloud);
+            stroke: #374151;
+            stroke-width: 4;
+            }
+            .envelope {
+            fill: #e5e7eb;
+            stroke: #374151;
+            stroke-width: 4;
+            }
+
+            @media (prefers-color-scheme: dark) {
+            .cloud {
+            fill:url(#GradientCloudDark);
+            stroke: #6b7280;
+            stroke-width: 4;
+            }
+            .envelope {
+            fill: #f9fafb;
+            stroke: #374151;
+            stroke-width: 4;
+            }
+            }
+        </style>
+    </defs>
+    <g>
+        <path class="cloud"
+              d="m 592 272 L 125 273 C 17 270 14 119 134 120 C 165 -29 389 -8 425 84 C 560 36 652 152 592 272 z"/>
+        <path class="envelope"
+              d="m 443.836 318.99 C 457.146 318.99 470.456 305.68 470.456 292.37 L 470.456 184.559 C 470.456 171.249 458.477 157.939 445.167 157.939 L 202.925 157.939 C 189.615 157.939 177.636 172.58 177.636 185.89 L 177.636 292.37 C 177.636 311.004 189.615 318.99 209.58 318.99 L 443.836 318.99 M 184.291 168.587 L 282.785 221.827 C 322.715 241.792 322.715 241.792 362.645 221.827 L 463.801 168.587 M 282.785 221.827 L 184.291 311.004 M 362.645 221.827 L 461.139 311.004 z"/>
+        <!--        <path class="envelope"-->
+        <!--              d="m 140.4 152.775 L 338.85 152.775 L 238.5 207 L 140.4 152.775 M 206.1 189 L 140.4 262.125 M 271.8 189 L 338.85 262.125 z"/>-->
+    </g>
+</svg>
