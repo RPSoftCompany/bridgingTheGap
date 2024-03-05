@@ -57,7 +57,7 @@
                :href="bib.link">{{
                 bib.title
               }}</a>
-            <span>&nbsp;{{ bib.author }}</span>
+            <span>;&nbsp;{{ bib.author }}</span>
           </template>
         </div>
       </div>
